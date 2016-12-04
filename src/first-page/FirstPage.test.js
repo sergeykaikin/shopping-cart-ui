@@ -72,3 +72,13 @@ it('should filter available items by name and id on filter input change (3)', ()
   wrapper.setState({filterValue: 'does not exist'});
   expect(wrapper.find('.AvailableItem').length).toBe(0);
 });
+
+it('should change shopping cart accordingly when uses selects an item to add', () => {
+  const wrapper = mountWithStore(<FirstPage />, {application: {loading: false, availableItems}});
+  
+  wrapper.find('.AvailableItem').at(0).find('.AvailableItem-addBtn').simulate('click');
+  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 1')).not.toBe(-1);
+
+  wrapper.find('.AvailableItem').at(2).find('.AvailableItem-addBtn').simulate('click');
+  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 3')).not.toBe(-1);
+});
