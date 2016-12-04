@@ -43,3 +43,32 @@ it('should render id, name, description and stock quantity for each available it
   expect(wrapper.find('.AvailableItem').at(2).find('.AvailableItem-id').text()).toBe('3');
   expect(wrapper.find('.AvailableItem').at(2).find('.AvailableItem-count').text()).toBe('0');
 });
+
+it('should filter available items by name and id on filter input change (1)', () => {
+  const wrapper = mountWithStore(<FirstPage />, {application: {loading: false, availableItems}});
+
+  wrapper.setState({filterValue: '1'});
+  expect(wrapper.find('.AvailableItem').length).toBe(1);
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-name').text()).toBe('Item 1');
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-description').text()).toBe('Item 1 description');
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-id').text()).toBe('1');
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-count').text()).toBe('1');
+});
+
+it('should filter available items by name and id on filter input change (2)', () => {
+  const wrapper = mountWithStore(<FirstPage />, {application: {loading: false, availableItems}});
+
+  wrapper.setState({filterValue: 'item 2'});
+  expect(wrapper.find('.AvailableItem').length).toBe(1);
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-name').text()).toBe('Item 2');
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-description').text()).toBe('Item 2 description');
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-id').text()).toBe('2');
+  expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-count').text()).toBe('10');
+});
+
+it('should filter available items by name and id on filter input change (3)', () => {
+  const wrapper = mountWithStore(<FirstPage />, {application: {loading: false, availableItems}});
+
+  wrapper.setState({filterValue: 'does not exist'});
+  expect(wrapper.find('.AvailableItem').length).toBe(0);
+});
