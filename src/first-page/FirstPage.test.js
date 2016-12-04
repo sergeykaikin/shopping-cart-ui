@@ -20,13 +20,13 @@ const availableItems = [{
 }];
 
 it('should render all available items from the store', () => {
-  const wrapper = mountWithStore(<FirstPage />, {availableItems});
+  const wrapper = mountWithStore(<FirstPage />, {application: {loading: false, availableItems}});
   
   expect(wrapper.find('.AvailableItem').length).toBe(3);
 });
 
 it('should render id, name, description and stock quantity for each available item', () => {
-  const wrapper = mountWithStore(<FirstPage />, {availableItems});
+  const wrapper = mountWithStore(<FirstPage />, {application: {loading: false, availableItems}});
   
   expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-name').text()).toBe('Item 1');
   expect(wrapper.find('.AvailableItem').at(0).find('.AvailableItem-description').text()).toBe('Item 1 description');

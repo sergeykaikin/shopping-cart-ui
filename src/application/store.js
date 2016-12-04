@@ -2,9 +2,11 @@ import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {routerMiddleware, routerReducer} from 'react-router-redux';
 import hashHistory from '../hashHistory';
+import application from './reducers';
 
 const reducer = combineReducers({
-	routing: routerReducer
+	routing: routerReducer,
+	application
 });
 
 const middleware = [applyMiddleware(thunk /*for dispatching async actions*/, routerMiddleware(hashHistory))];

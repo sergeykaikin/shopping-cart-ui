@@ -1,0 +1,24 @@
+.AvailableItem {
+    position: relative;
+    margin: 5px;
+    border: solid 1px lightslategray;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px #ddd;
+    padding: 10px;
+}
+.AvailableItem-name {
+    font-size: 16px;
+    text-decoration: underline;
+}
+.AvailableItem-description {
+    font-size: 12px;
+    font-style: italic;
+}
+.AvailableItem__idContainer {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.AvailableItem-count {
+    font-weight: bold;
+}

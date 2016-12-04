@@ -1,22 +1,29 @@
 import * as React from 'react';
-import logo from './logo.svg';
+import {Link} from 'react-router';
 import './App.css';
+import {connect} from 'react-redux';
+import {loadAvailableItems} from './actions';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/application/App.js</code> and save to reload.
-        </p>
-        {this.props.children}
+      <div className="Application">
+        <header>
+          <Link to="/">Home</Link>
+        </header>
+        <section>
+          {this.props.children}
+        </section>
+        <footer>
+          &copy; Sergey Kaikin
+        </footer>
       </div>
     );
   }
+
+  componentDidMount() {
+    this.props.dispatch(loadAvailableItems());
+  }
 }
 
-export default App;
+export default connect()(App);
