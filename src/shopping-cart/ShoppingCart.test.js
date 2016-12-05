@@ -43,9 +43,9 @@ it('should reduce stock depending on checked out items', () => {
   wrapper.find('.ShoppingCart-checkoutBnt').simulate('click');
   const appState = wrapper.context().store.getState().application;
   
-  expect(appState.availableItems[0].count).not.toBe(4);
-  expect(appState.availableItems[1].count).not.toBe(0);
-  expect(appState.shoppingCartItems.length).not.toBe(0); //shopping cart emptied on check out
+  expect(appState.availableItems[0].count).toBe(4);
+  expect(appState.availableItems[1].count).toBe(0);
+  expect(appState.shoppingCartItems.length).toBe(0); //shopping cart emptied on check out
 });
 
 it('should not allow to checkout items which are not available', () => {
@@ -63,6 +63,6 @@ it('should not allow to checkout items which are not available', () => {
   wrapper.find('.ShoppingCart-checkoutBnt').simulate('click');
   const appState = wrapper.context().store.getState().application;
   
-  expect(appState.availableItems[0].count).not.toBe(0);
-  expect(appState.shoppingCartItems.length).not.toBe(2); //shopping cart did not change because checkout items are not available
+  expect(appState.availableItems[0].count).toBe(0);
+  expect(appState.shoppingCartItems.length).toBe(2); //shopping cart did not change because checkout items are not available
 });

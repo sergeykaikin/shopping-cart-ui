@@ -2,7 +2,8 @@ import {handleActions} from 'redux-actions';
 import {
     REQUEST_AVAILABLE_ITEMS, 
     SET_AVAILABLE_ITEMS,
-    ADD_ITEM_TO_SHOPPING_CART
+    ADD_ITEM_TO_SHOPPING_CART,
+    CHECKOUT_ITEMS
 } from './actions';
 import * as _  from 'lodash';
 
@@ -16,7 +17,8 @@ export default handleActions(
     {
         [REQUEST_AVAILABLE_ITEMS]: requestAvailableItems,
         [SET_AVAILABLE_ITEMS]: setAvailableItems,
-        [ADD_ITEM_TO_SHOPPING_CART]: addItemToShoppingCart
+        [ADD_ITEM_TO_SHOPPING_CART]: addItemToShoppingCart,
+        [CHECKOUT_ITEMS]: checkoutItems
     },
     initialState
 );
@@ -45,4 +47,26 @@ export function addItemToShoppingCart(state, action) {
     shoppingCartItems.push(action.payload);
     
     return _.assign({}, state, {shoppingCartItems});
+}
+
+export function checkoutItems(state, action) {
+    let shoppingCartItems = state.shoppingCartItems.slice();
+    let availableItems = state.availableItems.slice();
+
+    _.cloneDeep(shoppingCartItems).forEach(sci => {
+        const availableItemIndex = _.findIndex(availableItems, i => i.id === sci.id);
+        const availableItem = availableItems[availableItemIndex];
+
+        if (availableItem && sci.quantity <= availableItem.count) {
+            shoppingCartItems.splice(_.findIndex(shoppingCartItems, i => i.id === sci.id), 1);
+            availableItems.splice(availableItemIndex, 1, {
+                id: availableItem.id,
+                name: availableItem.name,
+                description: availableItem.description,
+                count: (availableItem.count - sci.quantity)
+            });
+        }
+    });
+
+    return _.assign({}, state, {availableItems, shoppingCartItems}); 
 }
