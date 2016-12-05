@@ -22,3 +22,6 @@
 .AvailableItem-count {
     font-weight: bold;
 }
+.AvailableItem-addBtn {
+    float: right;
+}

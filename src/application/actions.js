@@ -4,9 +4,11 @@ import * as _ from 'lodash';
 
 export const REQUEST_AVAILABLE_ITEMS = 'REQUEST_AVAILABLE_ITEMS';
 export const SET_AVAILABLE_ITEMS = 'SET_AVAILABLE_ITEMS';
+export const ADD_ITEM_TO_SHOPPING_CART = 'ADD_ITEM_TO_SHOPPING_CART';
 
 const requestAvailableItems = createAction(REQUEST_AVAILABLE_ITEMS);
 const setAvailableItems = createAction(SET_AVAILABLE_ITEMS);
+const addItemToShoppingCart = createAction(ADD_ITEM_TO_SHOPPING_CART);
 const loadAvailableItems = () => dispatch => {
     dispatch(requestAvailableItems());
 
@@ -33,5 +35,6 @@ const loadAvailableItems = () => dispatch => {
 export {
     loadAvailableItems,
     requestAvailableItems,
-    setAvailableItems  
+    setAvailableItems,
+    addItemToShoppingCart
 };

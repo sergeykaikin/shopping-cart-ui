@@ -1,0 +1,11 @@
+.FirstPage__leftPane, 
+.FirstPage__rightPane {
+    display: inline-block;
+    vertical-align: top;
+}
+.FirstPage__leftPane {
+    width: 70%;
+}
+.FirstPage__rightPane {
+    width: 30%;
+}
