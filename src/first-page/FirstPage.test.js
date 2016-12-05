@@ -3,6 +3,8 @@ import {default as ConnectedFirstPage} from './FirstPage';
 import {FirstPage} from './FirstPage';
 import {mountWithStore} from '../utils/test-utils';
 import {mount} from 'enzyme';
+import * as sinon from 'sinon';
+import * as navigation from '../application/navigation';
 
 const availableItems = [{
     id: 1,
@@ -127,4 +129,15 @@ it('should add an item of a particular quantity to the shopping cart (3)', () =>
   wrapper.find('.AvailableItem').at(2).find('.AvailableItem-plusQuantityBtn').simulate('click'); //1+1=2
   wrapper.find('.AvailableItem').at(2).find('.AvailableItem-addBtn').simulate('click'); //can't add unavailable items
   expect(wrapper.find('.ShoppingCart').text().indexOf('Item 3')).toBe(-1);
+});
+
+it('should take you to your shopping cart', () => {
+  const navigateToShoppingCart = jest.fn();
+  const wrapper = mount(<FirstPage availableItems={availableItems} loading={false}/>);
+  const stub = sinon.stub(navigation, "navigateToShoppingCart", navigateToShoppingCart);
+  
+  wrapper.find('.AvailableItem-linkToCart').simulate('click');
+  expect(navigateToShoppingCart).toHaveBeenCalled();
+
+  stub.restore();
 });
