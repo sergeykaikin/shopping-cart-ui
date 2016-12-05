@@ -19,6 +19,6 @@ it('should display all item which have been added to the cart', () => {
       shoppingCartItems
   }});
   
-  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 1 (1)')).not.toBe(-1);
-  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 2 (10)')).not.toBe(-1);
+  expect(wrapper.find('.ShoppingCart').at(0).text().indexOf('Item 1 (1)')).not.toBe(-1);
+  expect(wrapper.find('.ShoppingCart').at(0).text().indexOf('Item 2 (10)')).not.toBe(-1);
 });

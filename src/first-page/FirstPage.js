@@ -4,6 +4,7 @@ import Loading from '../components/Loading';
 import AvailableItem from '../components/available-item/AvailableItem';
 import ShoppingCart from '../components/shopping-cart/ShoppingCart';
 import {addItemToShoppingCart} from '../application/actions';
+import * as navigation from '../application/navigation';
 
 import './FirstPage.css';
 
@@ -30,6 +31,18 @@ export class FirstPage extends React.Component {
                 </div>
                 <div className="FirstPage__rightPane">
                     <ShoppingCart items={this.props.shoppingCartItems} />
+                    <div>
+                        <a 
+                            className="AvailableItem-linkToCart"
+                            href="#" 
+                            onClick={(e) => {
+                                e.preventDefault();
+                                navigation.navigateToShoppingCart(this.props.dispatch);
+                            }}
+                        >
+                            Go to your shopping cart
+                        </a>
+                    </div>
                 </div>
             </div>
         );
