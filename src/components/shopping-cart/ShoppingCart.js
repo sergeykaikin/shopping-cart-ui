@@ -17,7 +17,7 @@ export default class ShoppingCart extends React.Component {
             return (
                 <ul>
                     {this.props.items.map(i => (
-                        <div key={i.id}>{i.name}</div>
+                        <div key={i.id}>{i.name} ({i.quantity})</div>
                     ))}
                 </ul>
             );

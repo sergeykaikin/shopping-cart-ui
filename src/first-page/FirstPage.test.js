@@ -85,8 +85,8 @@ it('should change shopping cart accordingly when uses selects an item to add', (
   wrapper.find('.AvailableItem').at(0).find('.AvailableItem-addBtn').simulate('click');
   expect(wrapper.find('.ShoppingCart').text().indexOf('Item 1')).not.toBe(-1);
 
-  wrapper.find('.AvailableItem').at(2).find('.AvailableItem-addBtn').simulate('click');
-  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 3')).not.toBe(-1);
+  wrapper.find('.AvailableItem').at(2).find('.AvailableItem-addBtn').simulate('click'); //cannot add id count is 0
+  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 3')).toBe(-1);
 });
 
 it('should add an item of a particular quantity to the shopping cart (1)', () => {

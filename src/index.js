@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 
 import routes from './application/routes';
 import hashHistory from './hashHistory';

@@ -25,3 +25,11 @@
 .AvailableItem-addBtn {
     float: right;
 }
+.AvailableItem__quantityButtonsCnt{
+    float: right;
+    min-width: 160px;
+    white-space: nowrap;
+}
+.AvailableItem-quantity {
+    width: 30px;
+}
