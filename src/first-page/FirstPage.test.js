@@ -88,3 +88,43 @@ it('should change shopping cart accordingly when uses selects an item to add', (
   wrapper.find('.AvailableItem').at(2).find('.AvailableItem-addBtn').simulate('click');
   expect(wrapper.find('.ShoppingCart').text().indexOf('Item 3')).not.toBe(-1);
 });
+
+it('should add an item of a particular quantity to the shopping cart (1)', () => {
+  const wrapper = mountWithStore(<ConnectedFirstPage/>, {application: {
+      availableItems,
+      loading: false,
+      shoppingCartItems: []
+  }});
+  
+  wrapper.find('.AvailableItem').at(0).find('.AvailableItem-plusQuantityBtn').simulate('click'); //no matter how many times 
+  wrapper.find('.AvailableItem').at(0).find('.AvailableItem-plusQuantityBtn').simulate('click'); //you click add more
+  wrapper.find('.AvailableItem').at(0).find('.AvailableItem-plusQuantityBtn').simulate('click'); //id the button is disabled
+  wrapper.find('.AvailableItem').at(0).find('.AvailableItem-addBtn').simulate('click');
+  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 1 (1)')).not.toBe(-1);
+});
+
+it('should add an item of a particular quantity to the shopping cart (2)', () => {
+  const wrapper = mountWithStore(<ConnectedFirstPage/>, {application: {
+      availableItems,
+      loading: false,
+      shoppingCartItems: []
+  }});
+  
+  wrapper.find('.AvailableItem').at(1).find('.AvailableItem-plusQuantityBtn').simulate('click'); //1+1=2
+  wrapper.find('.AvailableItem').at(1).find('.AvailableItem-plusQuantityBtn').simulate('click'); //2+1=3
+  wrapper.find('.AvailableItem').at(1).find('.AvailableItem-minusQuantityBtn').simulate('click'); //3-1=2
+  wrapper.find('.AvailableItem').at(1).find('.AvailableItem-addBtn').simulate('click');
+  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 2 (2)')).not.toBe(-1);
+});
+
+it('should add an item of a particular quantity to the shopping cart (3)', () => {
+  const wrapper = mountWithStore(<ConnectedFirstPage/>, {application: {
+      availableItems,
+      loading: false,
+      shoppingCartItems: []
+  }});
+  
+  wrapper.find('.AvailableItem').at(2).find('.AvailableItem-plusQuantityBtn').simulate('click'); //1+1=2
+  wrapper.find('.AvailableItem').at(2).find('.AvailableItem-addBtn').simulate('click'); //can't add unavailable items
+  expect(wrapper.find('.ShoppingCart').text().indexOf('Item 3')).toBe(-1);
+});
